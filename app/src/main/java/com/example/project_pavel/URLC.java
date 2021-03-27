@@ -22,8 +22,8 @@ public class URLC {
         try {
 
             connection.setRequestMethod("GET");
-            connection.setConnectTimeout(5000);
-            connection.setReadTimeout(5000);
+            connection.setConnectTimeout(9000);
+            connection.setReadTimeout(9000);
 
             int status = connection.getResponseCode();
             System.out.println("Status  ->  " + status);

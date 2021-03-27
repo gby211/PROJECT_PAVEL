@@ -1,5 +1,7 @@
 package com.example.project_pavel;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -7,29 +9,33 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class Parser extends AsyncTask<Void, Void, ArrayList<DataCom>> {
+public class Parser extends AsyncTask<String, Void, ArrayList<DataCom>> {
 
     ArrayList<String> price_com = new ArrayList<>();
     ArrayList<String> change_price = new ArrayList<>();
+    ArrayList<String> name_com = new ArrayList<>();
+    ArrayList<Bitmap> icon_com = new ArrayList<>();
 
     URLC responseFromURL = new URLC();
-    private String[] start_tiket_str = new String[]{"AAPL", "MSFT", "AMZN", "FB", "GOOG", "INTC", "AAPL", "MSFT", "AMZN", "FB", "GOOG", "INTC"};
+    private String[] start_tiket_str = new String[]{"AAPL", "MSFT", "AMZN", "FB", "GOOG", "INTC","KO","MA","ORCL","NVDA"};
 
     ArrayList<DataCom> dataComs = new ArrayList<>();
 
     @Override
-    protected ArrayList<DataCom> doInBackground(Void... voids) {
+    protected ArrayList<DataCom> doInBackground(String... strings_start) {
         try {
             String response = "";
             String url = "";
-            for (int i = 0; i < start_tiket_str.length; i++) {
-                String nameCom = start_tiket_str[i];
+            for (int i = 0; i < strings_start.length; i++) {
+                String nameCom = strings_start[i];
                 String key = "c13njrv48v6qin45q270";
                 url = "https://finnhub.io/api/v1/quote?symbol=" + nameCom + "&token=" + key;
 
@@ -41,7 +47,7 @@ public class Parser extends AsyncTask<Void, Void, ArrayList<DataCom>> {
                 price_com.add(pr_com);
                 Double tmpc = (double) jsonObject.get("c");
                 Double tmppc = (double) jsonObject.get("pc");
-                Double change_price_tmp = tmpc - tmppc ;
+                Double change_price_tmp = tmpc - tmppc;
                 String sign = "";
 
                 if (change_price_tmp < 0){
@@ -58,9 +64,31 @@ public class Parser extends AsyncTask<Void, Void, ArrayList<DataCom>> {
                 String r2 = String.format("%.2f",Math.abs(change_price_tmp2));
                 String change_price_final = sign+"$"+r1+" ("+r2+"%)";
                 change_price.add(change_price_final);
+
+                url = "https://finnhub.io/api/v1/stock/profile2?symbol="+nameCom+"&token="+key;
+                response = responseFromURL.Connection(url);
+                JSONObject jsonObject_com = new JSONObject(response);
+                String com_name =  jsonObject_com.get("name").toString();
+
+                com_name = com_name.substring(0,com_name.length()-4);
+                name_com.add(com_name);
+                Bitmap icon = null;
+                String url_icon = jsonObject_com.getString("logo");
+
+                try {
+                    InputStream in = new java.net.URL(url_icon).openStream();
+                    icon = BitmapFactory.decodeStream(in);
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+
+
+                icon_com.add(icon);
             }
-            for (int i = 0; i<start_tiket_str.length;i++){
-                dataComs.add(new DataCom(start_tiket_str[i],start_tiket_str[i],price_com.get(i),change_price.get(i),false));
+
+
+            for (int i = 0; i<strings_start.length;i++){
+                dataComs.add(new DataCom(strings_start[i],name_com.get(i),price_com.get(i),change_price.get(i),false,icon_com.get(i)));
             }
 
         } catch (IOException | JSONException e) {
@@ -76,4 +104,7 @@ public class Parser extends AsyncTask<Void, Void, ArrayList<DataCom>> {
     protected void onPostExecute(ArrayList<DataCom> dataComs) {
         super.onPostExecute(dataComs);
     }
+
+
+
 }

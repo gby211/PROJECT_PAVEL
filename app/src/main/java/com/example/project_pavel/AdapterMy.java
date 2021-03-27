@@ -1,11 +1,13 @@
 package com.example.project_pavel;
 
 import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -41,10 +43,12 @@ public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
         holder.favourite.setChecked(item.getFavourite());
         holder.price_com.setText(item.getPrice_com());
         holder.tiket.setText(item.getTiket());
+        holder.picture.setImageBitmap(item.getPicture());
+//        if (item  == false){
+//
+//        }
 
-
-
-        if (item.getChange_price().charAt(0) == '-' ){
+        if (item.getChange_price().charAt(0) == '-'){
             holder.change_price.setTextColor(Color.RED);
         }
         else {
@@ -64,6 +68,7 @@ public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
         TextView price_com;
         TextView change_price;
         CheckBox favourite;
+        ImageView picture;
 
         public MyViewClass(@NonNull View itemView) {
             super(itemView);
@@ -72,6 +77,7 @@ public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
             price_com = (TextView) itemView.findViewById(R.id.textView_price_com);
             change_price = (TextView) itemView.findViewById(R.id.textView_change_price);
             favourite = (CheckBox) itemView.findViewById(R.id.checkBox_favourite);
+            picture = (ImageView) itemView.findViewById(R.id.imageView3);
         }
     }
 }

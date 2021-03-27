@@ -12,8 +12,18 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class StocksFragment  extends Fragment {
 
@@ -29,6 +39,8 @@ public class StocksFragment  extends Fragment {
 
     private Toolbar toolbar;
 
+
+    private String[] start_tiket_str = new String[]{"TSLA","AAPL", "MSFT", "AMZN", "FB", "INTC","KO","ORCL","NVDA","NFLX","GE"};
 //    RecyclerView recyclerView;
 //    ArrayList<String> name_com = new ArrayList<>();
 //    ArrayList<String> tiket = new ArrayList<>();
@@ -48,7 +60,7 @@ public class StocksFragment  extends Fragment {
 
         myRecyclerView = (RecyclerView) view.findViewById(R.id.list_stocks_F);
         Parser parser = new Parser();
-        parser.execute();
+        parser.execute(start_tiket_str);
         try {
             response = parser.get();
         } catch (ExecutionException e) {
@@ -85,6 +97,42 @@ public class StocksFragment  extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mPage = getArguments().getInt(ARG_PAGE);
+        }
+    }
+
+    public ArrayList<String> readFileFavourite(){
+        String str = "";
+        ArrayList<String> gg = new ArrayList<>();
+        try{
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(getContext().openFileInput("favourite")));
+
+            // читаем содержимое
+            while ((str = br.readLine()) != null) {
+                gg.add(str);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return gg;
+    }
+
+    public void writeFileFavourite(ArrayList<String> arrayList){
+        try{
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
+                    getContext().openFileOutput("favourite", MODE_PRIVATE)));
+            for (int i =0 ; i < arrayList.size();i++){
+                bw.write(arrayList.get(i));
+                bw.write("\n");
+            }
+            bw.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

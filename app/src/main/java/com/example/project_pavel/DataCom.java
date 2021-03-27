@@ -1,18 +1,30 @@
 package com.example.project_pavel;
 
+import android.graphics.Bitmap;
+
 public class DataCom {
     private String name_com;
     private String tiket;
     private String price_com;
     private String change_price;
     private Boolean favourite;
+    private Bitmap picture;
 
-    public DataCom(String name_com, String tiket, String price_com, String change_price, Boolean favourite) {
+    public DataCom(String name_com, String tiket, String price_com, String change_price, Boolean favourite,Bitmap picture) {
         this.name_com = name_com;
         this.tiket = tiket;
         this.price_com = price_com;
         this.change_price = change_price;
         this.favourite = favourite;
+        this.picture = picture;
+    }
+
+    public Bitmap getPicture() {
+        return picture;
+    }
+
+    public void setPicture(Bitmap picture) {
+        this.picture = picture;
     }
 
     public String getName_com() {
