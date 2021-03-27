@@ -1,35 +1,69 @@
 package com.example.project_pavel;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toolbar;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public class StocksFragment  extends Fragment {
 
-    RecyclerView recyclerView;
-    ArrayList<String> name_com = new ArrayList<>();
-    ArrayList<String> tiket = new ArrayList<>();
-    ArrayList<Double> price_com = new ArrayList<>();
-    ArrayList<String> change_price = new ArrayList<>();
-    ArrayList<Boolean> favourite = new ArrayList<>();
-    private String[] start_tiket_str = new String[]{"AAPL", "MSFT", "AMZN", "FB"};
-    private ArrayList<String> start_tiket = new ArrayList<>();
-    private String KEY_FINNHUB = "c13njrv48v6qin45q270";
+    public static final String ARG_PAGE = "ARG_PAGE";
+
+    private int mPage;
+
+    public static  String KEY_FINNHUB = "c13njrv48v6qin45q270";
+    private ArrayList<DataCom> response;
+    private RecyclerView myRecyclerView;
+    private RecyclerView.LayoutManager layoutManager;
+    private RecyclerView.Adapter adapter;
+
+    private Toolbar toolbar;
+
+//    RecyclerView recyclerView;
+//    ArrayList<String> name_com = new ArrayList<>();
+//    ArrayList<String> tiket = new ArrayList<>();
+//    ArrayList<Double> price_com = new ArrayList<>();
+//    ArrayList<String> change_price = new ArrayList<>();
+//    ArrayList<Boolean> favourite = new ArrayList<>();
+//    private String[] start_tiket_str = new String[]{"AAPL", "MSFT", "AMZN", "FB"};
+//    private ArrayList<String> start_tiket = new ArrayList<>();
+//    private String KEY_FINNHUB = "c13njrv48v6qin45q270";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_stocks, container, false);
         View view = inflater.inflate(R.layout.fragment_stocks, container, false);
-        recyclerView = (RecyclerView) view.findViewById(R.id.list_stocks_F);
 
 
+        myRecyclerView = (RecyclerView) view.findViewById(R.id.list_stocks_F);
+        Parser parser = new Parser();
+        parser.execute();
+        try {
+            response = parser.get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(response);
+//        myRecyclerView = container.getRootView().findViewById(R.id.list_stocks_F);
+        myRecyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(getContext());
+        adapter = new AdapterMy(response);
+
+        myRecyclerView.setLayoutManager(layoutManager);
+        myRecyclerView.setAdapter(adapter);
 
 
 
@@ -44,5 +78,13 @@ public class StocksFragment  extends Fragment {
 //        AdapterMy adapterMy = new AdapterMy(start_tiket, start_tiket,price_com,change_price,favourite);
 //        recyclerView.setAdapter(adapterMy);
         return view;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mPage = getArguments().getInt(ARG_PAGE);
+        }
     }
 }

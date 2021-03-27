@@ -1,12 +1,20 @@
 package com.example.project_pavel;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toolbar;
+
+import com.google.android.material.tabs.TabLayout;
 
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -23,6 +31,11 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter adapter;
 
+    private Toolbar toolbar;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+
+
     StocksFragment fragS;
     FavouriteFragment fragF;
     androidx.fragment.app.FragmentTransaction fTrans;
@@ -31,27 +44,31 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        fragF = new FavouriteFragment();
-        fragS = new StocksFragment();
 //        gg();
 
-        Parser parser = new Parser();
-        parser.execute();
-        try {
-            response = parser.get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        //System.out.println(response);
-        myRecyclerView = findViewById(R.id.list_stocks);
-        myRecyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
-        adapter = new AdapterMy(response);
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
+        setupViewPager(viewPager);
 
-        myRecyclerView.setLayoutManager(layoutManager);
-        myRecyclerView.setAdapter(adapter);
+        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        tabLayout.setupWithViewPager(viewPager);
+
+//        Parser parser = new Parser();
+//        parser.execute();
+//        try {
+//            response = parser.get();
+//        } catch (ExecutionException e) {
+//            e.printStackTrace();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        System.out.println(response);
+//        myRecyclerView = findViewById(R.id.list_stocks_F);
+//        myRecyclerView.setHasFixedSize(true);
+//        layoutManager = new LinearLayoutManager(this);
+//        adapter = new AdapterMy(response);
+//
+//        myRecyclerView.setLayoutManager(layoutManager);
+//        myRecyclerView.setAdapter(adapter);
 
 
     }
@@ -95,5 +112,13 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //        fTrans.commit();
 //    }
+
+
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new StocksFragment(), "Stocks");
+        adapter.addFragment(new FavouriteFragment(), "Favourite");
+        viewPager.setAdapter(adapter);
+    }
 
 }
