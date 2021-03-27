@@ -1,6 +1,5 @@
 package com.example.project_pavel;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,9 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -102,14 +99,12 @@ public class StocksFragment  extends Fragment {
 
     public ArrayList<String> readFileFavourite(){
         String str = "";
-        ArrayList<String> gg = new ArrayList<>();
+        ArrayList<String> favourite_list = new ArrayList<>();
         try{
 
             BufferedReader br = new BufferedReader(new InputStreamReader(getContext().openFileInput("favourite")));
-
-            // читаем содержимое
             while ((str = br.readLine()) != null) {
-                gg.add(str);
+                favourite_list.add(str);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -117,7 +112,7 @@ public class StocksFragment  extends Fragment {
             e.printStackTrace();
         }
 
-        return gg;
+        return favourite_list;
     }
 
     public void writeFileFavourite(ArrayList<String> arrayList){

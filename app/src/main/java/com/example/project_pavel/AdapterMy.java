@@ -1,6 +1,7 @@
 package com.example.project_pavel;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -13,7 +14,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
 
@@ -36,7 +45,9 @@ public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull MyViewClass holder, int position) {
+
         DataCom item = dataComs.get(position);
+
 
         holder.name_com.setText(item.getName_com());
         holder.change_price.setText(item.getChange_price());
@@ -80,4 +91,5 @@ public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
             picture = (ImageView) itemView.findViewById(R.id.imageView3);
         }
     }
+
 }

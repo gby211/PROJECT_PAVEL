@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<String> arrayList;
 
+    public static ArrayList<String> favourite_data;
+
     StocksFragment fragS;
     FavouriteFragment fragF;
     androidx.fragment.app.FragmentTransaction fTrans;
@@ -49,8 +51,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
+        favourite_data = readFileFavourite();
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         setupViewPager(viewPager);
@@ -62,10 +63,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    void writeFileFavourite(ArrayList<String> arrayList){
+    public void writeFileFavourite(ArrayList<String> arrayList){
         try{
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
-                    openFileOutput("favourite", MODE_PRIVATE)));
+                    openFileOutput("favourite.txt", MODE_PRIVATE)));
             for (int i =0 ; i < arrayList.size();i++){
                 bw.write(arrayList.get(i));
                 bw.write("\n");
@@ -83,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> gg = new ArrayList<>();
         try{
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(openFileInput("favourite")));
+            BufferedReader br = new BufferedReader(new InputStreamReader(openFileInput("favourite.txt")));
 
             // читаем содержимое
             while ((str = br.readLine()) != null) {
@@ -99,30 +100,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-//    public void gg() {
-//        fTrans = getSupportFragmentManager().beginTransaction();
-//        fTrans.replace(R.id.fr_place, fragS);
-//        fTrans.commit();
-//    }
-
-
-//    @SuppressLint("NonConstantResourceId")
-//    public void fragmentChange(View view) {
-//        fTrans = getSupportFragmentManager().beginTransaction();
-//
-//
-//        switch (view.getId()) {
-//            case R.id.button_favorite:
-//                fTrans.replace(R.id.fr_place, fragF);
-//                break;
-//            case R.id.button_stocks:
-//                fTrans.replace(R.id.fr_place, fragS);
-//                break;
-//            default:
-//                break;
-//        }
-//        fTrans.commit();
-//    }
 
 
     private void setupViewPager(ViewPager viewPager) {

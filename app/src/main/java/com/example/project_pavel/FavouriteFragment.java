@@ -31,7 +31,7 @@ public class FavouriteFragment  extends Fragment {
     private RecyclerView myRecyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter adapter;
-    private String[] start_tiket_str = new String[]{"AAPL"};
+    private String[] start_tiket_str = new String[]{"AAPL","MCD"};
 
 
     @Override

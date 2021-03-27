@@ -7,4 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="yellow">#FFEB3B</color>
+    <color name="grey">#D80909</color>
+
+    <style name="CustomButtonMaterial" parent="Widget.MaterialComponents.Button">
+        <item name="materialThemeOverlay">@style/RedButtonThemeOverlay</item>
+    </style>
+    <style name="RedButtonThemeOverlay">
+        <item name="colorPrimary">@color/yellow</item>
+    </style>
 </resources>

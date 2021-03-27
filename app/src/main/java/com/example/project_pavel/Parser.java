@@ -16,6 +16,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
+
+import static com.example.project_pavel.MainActivity.favourite_data;
 
 public class Parser extends AsyncTask<String, Void, ArrayList<DataCom>> {
 
@@ -23,9 +26,9 @@ public class Parser extends AsyncTask<String, Void, ArrayList<DataCom>> {
     ArrayList<String> change_price = new ArrayList<>();
     ArrayList<String> name_com = new ArrayList<>();
     ArrayList<Bitmap> icon_com = new ArrayList<>();
+    ArrayList<Boolean> favourite = new ArrayList<>();
 
     URLC responseFromURL = new URLC();
-    private String[] start_tiket_str = new String[]{"AAPL", "MSFT", "AMZN", "FB", "GOOG", "INTC","KO","MA","ORCL","NVDA"};
 
     ArrayList<DataCom> dataComs = new ArrayList<>();
 
@@ -84,11 +87,16 @@ public class Parser extends AsyncTask<String, Void, ArrayList<DataCom>> {
 
 
                 icon_com.add(icon);
+                if (favourite_data.contains(strings_start[i])){
+                    favourite.add(true);
+                }else {
+                    favourite.add(false);
+                }
+                Log.d("FAVOURITE",favourite.toString());
             }
 
-
             for (int i = 0; i<strings_start.length;i++){
-                dataComs.add(new DataCom(strings_start[i],name_com.get(i),price_com.get(i),change_price.get(i),false,icon_com.get(i)));
+                dataComs.add(new DataCom(strings_start[i],name_com.get(i),price_com.get(i),change_price.get(i),favourite.get(i),icon_com.get(i)));
             }
 
         } catch (IOException | JSONException e) {

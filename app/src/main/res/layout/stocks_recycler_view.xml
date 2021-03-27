@@ -19,12 +19,15 @@
 
     <CheckBox
         android:id="@+id/checkBox_favourite"
-        android:layout_width="32dp"
-        android:layout_height="19dp"
+        android:layout_width="26dp"
+        android:layout_height="23dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="20dp"
+        android:button="@drawable/ic_baseline_star_24"
+        android:theme="@style/MyCheckBox"
         app:layout_constraintStart_toEndOf="@+id/textView_tiket"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:useMaterialThemeColors="true" />
 
     <TextView
         android:id="@+id/textView_name_com"
