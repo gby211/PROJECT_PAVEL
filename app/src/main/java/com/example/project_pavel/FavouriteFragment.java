@@ -51,7 +51,7 @@ public class FavouriteFragment  extends Fragment {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println(response);
+        //System.out.println(response);
 //        myRecyclerView = container.getRootView().findViewById(R.id.list_stocks_F);
         myRecyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());

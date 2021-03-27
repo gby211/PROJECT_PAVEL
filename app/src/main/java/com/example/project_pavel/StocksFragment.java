@@ -40,7 +40,7 @@ public class StocksFragment  extends Fragment {
     private String[] start_tiket_str = new String[]{"TSLA","AAPL", "MSFT", "AMZN", "FB", "INTC","KO","ORCL","NVDA","NFLX","GE"};
 //    RecyclerView recyclerView;
 //    ArrayList<String> name_com = new ArrayList<>();
-//    ArrayList<String> tiket = new ArrayList<>();
+//    ArrayList<String> tiker = new ArrayList<>();
 //    ArrayList<Double> price_com = new ArrayList<>();
 //    ArrayList<String> change_price = new ArrayList<>();
 //    ArrayList<Boolean> favourite = new ArrayList<>();
@@ -65,7 +65,7 @@ public class StocksFragment  extends Fragment {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println(response);
+        //System.out.println(response);
 //        myRecyclerView = container.getRootView().findViewById(R.id.list_stocks_F);
         myRecyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());

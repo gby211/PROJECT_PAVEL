@@ -1,28 +1,22 @@
 package com.example.project_pavel;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
-import static android.content.Context.MODE_PRIVATE;
+import static com.example.project_pavel.MainActivity.favourite_data;
 
 public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
 
@@ -53,11 +47,34 @@ public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
         holder.change_price.setText(item.getChange_price());
         holder.favourite.setChecked(item.getFavourite());
         holder.price_com.setText(item.getPrice_com());
-        holder.tiket.setText(item.getTiket());
+        holder.tiker.setText(item.getTiker());
         holder.picture.setImageBitmap(item.getPicture());
 //        if (item  == false){
 //
 //        }
+        holder.favourite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    Log.d("pepe",favourite_data.toString()+"  до");
+                    favourite_data.add(item.getTiker());
+                    Log.d("pepe",favourite_data.toString()+"  добавление");
+                }
+                else {
+                    Log.d("pepe",favourite_data.toString()+"  до");
+                    for (String com: favourite_data) {
+                        if (com.equals(item.getTiker().toString())) {
+                            favourite_data.remove(com);
+
+                            break;
+                        }
+                    }
+                    Log.d("pepe",favourite_data.toString()+"  удаление");
+                }
+            }
+        }
+        );
+
 
         if (item.getChange_price().charAt(0) == '-'){
             holder.change_price.setTextColor(Color.RED);
@@ -75,7 +92,7 @@ public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
 
     public class MyViewClass extends RecyclerView.ViewHolder {
         TextView name_com;
-        TextView tiket;
+        TextView tiker;
         TextView price_com;
         TextView change_price;
         CheckBox favourite;
@@ -84,12 +101,13 @@ public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
         public MyViewClass(@NonNull View itemView) {
             super(itemView);
             name_com = (TextView) itemView.findViewById(R.id.textView_name_com);
-            tiket = (TextView) itemView.findViewById(R.id.textView_tiket);
+            tiker = (TextView) itemView.findViewById(R.id.textView_tiket);
             price_com = (TextView) itemView.findViewById(R.id.textView_price_com);
             change_price = (TextView) itemView.findViewById(R.id.textView_change_price);
             favourite = (CheckBox) itemView.findViewById(R.id.checkBox_favourite);
             picture = (ImageView) itemView.findViewById(R.id.imageView3);
         }
     }
+
 
 }

@@ -51,7 +51,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        favourite_data = readFileFavourite();
+        favourite_data = readFileFavourite(this);
+        Log.d("pepe",favourite_data.toString());
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         setupViewPager(viewPager);
@@ -63,10 +64,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void writeFileFavourite(ArrayList<String> arrayList){
+    public static void writeFileFavourite(ArrayList<String> arrayList, Context context){
         try{
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
-                    openFileOutput("favourite.txt", MODE_PRIVATE)));
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(context.openFileOutput("favourite.txt", MODE_PRIVATE)));
             for (int i =0 ; i < arrayList.size();i++){
                 bw.write(arrayList.get(i));
                 bw.write("\n");
@@ -79,12 +79,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public ArrayList<String> readFileFavourite(){
+    public static ArrayList<String> readFileFavourite(Context context){
         String str = "";
         ArrayList<String> gg = new ArrayList<>();
         try{
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(openFileInput("favourite.txt")));
+            BufferedReader br = new BufferedReader(new InputStreamReader(context.openFileInput("favourite.txt")));
 
             // читаем содержимое
             while ((str = br.readLine()) != null) {

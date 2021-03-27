@@ -4,15 +4,15 @@ import android.graphics.Bitmap;
 
 public class DataCom {
     private String name_com;
-    private String tiket;
+    private String tiker;
     private String price_com;
     private String change_price;
     private Boolean favourite;
     private Bitmap picture;
 
-    public DataCom(String name_com, String tiket, String price_com, String change_price, Boolean favourite,Bitmap picture) {
+    public DataCom(String name_com, String tiker, String price_com, String change_price, Boolean favourite, Bitmap picture) {
         this.name_com = name_com;
-        this.tiket = tiket;
+        this.tiker = tiker;
         this.price_com = price_com;
         this.change_price = change_price;
         this.favourite = favourite;
@@ -35,12 +35,12 @@ public class DataCom {
         this.name_com = name_com;
     }
 
-    public String getTiket() {
-        return tiket;
+    public String getTiker() {
+        return tiker;
     }
 
-    public void setTiket(String tiket) {
-        this.tiket = tiket;
+    public void setTiker(String tiker) {
+        this.tiker = tiker;
     }
 
     public String getPrice_com() {

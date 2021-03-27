@@ -26,7 +26,8 @@ public class URLC {
             connection.setReadTimeout(9000);
 
             int status = connection.getResponseCode();
-            System.out.println("Status  ->  " + status);
+
+//            System.out.println("Status  ->  " + status);
 
             if (status > 299) {
                 reader = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
@@ -37,7 +38,7 @@ public class URLC {
                 responseContent.append(line);
             }
             reader.close();
-            System.out.println(responseContent.toString());
+//            System.out.println(responseContent.toString());
             return responseContent.toString();
 
         } catch (

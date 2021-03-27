@@ -45,7 +45,7 @@ public class Parser extends AsyncTask<String, Void, ArrayList<DataCom>> {
                 response = responseFromURL.Connection(url);
 
                 JSONObject jsonObject = new JSONObject(response);
-                System.out.println();
+                //System.out.println();
                 String pr_com = "$"+jsonObject.get("c").toString();
                 price_com.add(pr_com);
                 Double tmpc = (double) jsonObject.get("c");
@@ -96,7 +96,7 @@ public class Parser extends AsyncTask<String, Void, ArrayList<DataCom>> {
             }
 
             for (int i = 0; i<strings_start.length;i++){
-                dataComs.add(new DataCom(strings_start[i],name_com.get(i),price_com.get(i),change_price.get(i),favourite.get(i),icon_com.get(i)));
+                dataComs.add(new DataCom(name_com.get(i),strings_start[i],price_com.get(i),change_price.get(i),favourite.get(i),icon_com.get(i)));
             }
 
         } catch (IOException | JSONException e) {
