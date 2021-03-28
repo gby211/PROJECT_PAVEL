@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import static com.example.project_pavel.MainActivity.favourite_data;
-import static com.example.project_pavel.MainActivity.writeFileFavourite;
 
 public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
 
@@ -27,7 +26,6 @@ public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
         dataComs = data;
     }
 
-    MainActivity mainActivity = new MainActivity();
 
     @NonNull
     @Override
@@ -61,14 +59,13 @@ public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
                     Log.d("pepe",favourite_data.toString()+"  до");
                     favourite_data.add(item.getTiker());
                     Log.d("pepe",favourite_data.toString()+"  добавление");
-                    writeFileFavourite(favourite_data,holder.itemView.getContext());
                 }
                 else {
                     Log.d("pepe",favourite_data.toString()+"  до");
                     for (String com: favourite_data) {
                         if (com.equals(item.getTiker().toString())) {
                             favourite_data.remove(com);
-                            writeFileFavourite(favourite_data,holder.itemView.getContext());
+
                             break;
                         }
                     }
