@@ -10,9 +10,11 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toolbar;
 
 import com.google.android.material.tabs.TabLayout;
@@ -42,7 +44,10 @@ public class MainActivity extends AppCompatActivity {
 
     public static ArrayList<String> favourite_data;
     public static ArrayList<DataCom> DataCom_favourite_data;
+    public static String search_result;
+    public static String search_text;
 
+    EditText editText ;
     StocksFragment fragS;
     FavouriteFragment fragF;
     androidx.fragment.app.FragmentTransaction fTrans;
@@ -52,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        editText = findViewById(R.id.editTextTextPersonName);
         favourite_data = readFileFavourite(this);
 //        Log.d("pepe",favourite_data.toString());
 //        favourite_data.clear();
@@ -66,9 +73,14 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
 
-
     }
 
+
+    public void serch_com(View view) {
+        search_text = editText.getText().toString();
+        Intent intent = new Intent(MainActivity.this, ActivitySerch.class);
+        startActivity(intent);
+    }
 
     public static void writeFileFavourite(ArrayList<String> arrayList, Context context){
         try{

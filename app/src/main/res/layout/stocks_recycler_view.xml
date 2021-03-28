@@ -3,14 +3,51 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="115sp"
+    android:background="@android:drawable/editbox_background"
+    android:backgroundTint="#25C3C3C3">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/textView_change_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="12dp"
+        android:includeFontPadding="false"
+        android:text="TextView"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_price_com" />
+
+    <TextView
+        android:id="@+id/textView_price_com"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:text="TextView"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView_tiket"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="28dp"
         android:text="TextView"
         android:textSize="19sp"
         android:textStyle="bold"
@@ -22,7 +59,7 @@
         android:layout_width="26dp"
         android:layout_height="23dp"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="28dp"
         android:button="@drawable/ic_baseline_star_24"
         android:theme="@style/MyCheckBox"
         app:layout_constraintStart_toEndOf="@+id/textView_tiket"
@@ -34,45 +71,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="20dp"
         android:text="TextView"
         android:textSize="17sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_tiket" />
-
-    <TextView
-        android:id="@+id/textView_price_com"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="TextView"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView_change_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:includeFontPadding="false"
-        android:text="TextView"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_price_com" />
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="5dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_launcher" />
 </androidx.constraintlayout.widget.ConstraintLayout>

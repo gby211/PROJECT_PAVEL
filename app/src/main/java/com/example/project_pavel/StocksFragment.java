@@ -29,7 +29,6 @@ public class StocksFragment  extends Fragment {
 
     private int mPage;
 
-    public static  String KEY_FINNHUB = "c13njrv48v6qin45q270";
     private ArrayList<DataCom> response;
     private RecyclerView myRecyclerView;
     private RecyclerView.LayoutManager layoutManager;

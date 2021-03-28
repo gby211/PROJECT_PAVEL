@@ -4,19 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
 
-    <SearchView
-        android:id="@+id/searchView"
-        android:layout_width="354dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:iconifiedByDefault="false"
-        android:isScrollContainer="false"
-        android:queryHint="fgsdffdfg"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    tools:context=".MainActivity">
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
@@ -48,5 +37,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName"
+        android:layout_width="293dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Find company"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:onClick="serch_com"
+        app:srcCompat="@android:drawable/ic_menu_search" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
