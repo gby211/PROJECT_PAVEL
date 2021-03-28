@@ -27,7 +27,7 @@ public class URLC {
 
             int status = connection.getResponseCode();
 
-//            System.out.println("Status  ->  " + status);
+            System.out.println("Status  ->  " + status);
 
             if (status > 299) {
                 reader = new BufferedReader(new InputStreamReader(connection.getErrorStream()));

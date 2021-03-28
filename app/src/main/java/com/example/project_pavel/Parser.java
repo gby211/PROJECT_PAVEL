@@ -48,8 +48,8 @@ public class Parser extends AsyncTask<String, Void, ArrayList<DataCom>> {
                 //System.out.println();
                 String pr_com = "$"+jsonObject.get("c").toString();
                 price_com.add(pr_com);
-                Double tmpc = (double) jsonObject.get("c");
-                Double tmppc = (double) jsonObject.get("pc");
+                Double tmpc = (double) jsonObject.getDouble("c");
+                Double tmppc = (double) jsonObject.getDouble("pc");
                 Double change_price_tmp = tmpc - tmppc;
                 String sign = "";
 

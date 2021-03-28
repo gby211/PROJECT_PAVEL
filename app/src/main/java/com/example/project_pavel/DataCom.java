@@ -66,4 +66,16 @@ public class DataCom {
     public void setFavourite(Boolean favourite) {
         this.favourite = favourite;
     }
+
+    @Override
+    public String toString() {
+        return "DataCom{" +
+                "name_com='" + name_com + '\'' +
+                ", tiker='" + tiker + '\'' +
+                ", price_com='" + price_com + '\'' +
+                ", change_price='" + change_price + '\'' +
+                ", favourite=" + favourite +
+                ", picture=" + picture +
+                '}';
+    }
 }

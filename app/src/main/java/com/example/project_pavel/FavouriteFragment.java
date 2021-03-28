@@ -1,6 +1,10 @@
 package com.example.project_pavel;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.util.Log;
+import android.view.DragAndDropPermissions;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +24,8 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.example.project_pavel.MainActivity.favourite_data;
+import static com.example.project_pavel.MainActivity.DataCom_favourite_data;
 
 public class FavouriteFragment  extends Fragment {
 
@@ -30,8 +36,7 @@ public class FavouriteFragment  extends Fragment {
     private ArrayList<DataCom> response;
     private RecyclerView myRecyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private RecyclerView.Adapter adapter;
-    private String[] start_tiket_str = new String[]{"AAPL","MCD"};
+    private static AdapterMy adapter;
 
 
     @Override
@@ -40,9 +45,15 @@ public class FavouriteFragment  extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_favourite, container, false);
         View view = inflater.inflate(R.layout.fragment_favourite, container, false);
 
+        String[] start_T = new String[favourite_data.size()];
+        for (int i = 0 ; i<favourite_data.size();i++){
+            start_T[i] = favourite_data.get(i);
+        }
+
+        Log.d("pup",start_T.toString());
         myRecyclerView = (RecyclerView) view.findViewById(R.id.list_favourite_F);
         Parser parser = new Parser();
-        parser.execute(start_tiket_str);
+        parser.execute(start_T);
         try {
             response = parser.get();
         } catch (
@@ -55,7 +66,8 @@ public class FavouriteFragment  extends Fragment {
 //        myRecyclerView = container.getRootView().findViewById(R.id.list_stocks_F);
         myRecyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
-        adapter = new AdapterMy(response);
+
+        adapter = new AdapterMy(response,this);
 
         myRecyclerView.setLayoutManager(layoutManager);
         myRecyclerView.setAdapter(adapter);
@@ -72,40 +84,13 @@ public class FavouriteFragment  extends Fragment {
         }
     }
 
-
-    public ArrayList<String> readFileFavourite(){
-        String str = "";
-        ArrayList<String> gg = new ArrayList<>();
-        try{
-
-            BufferedReader br = new BufferedReader(new InputStreamReader(getContext().openFileInput("favourite")));
-
-            // читаем содержимое
-            while ((str = br.readLine()) != null) {
-                gg.add(str);
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return gg;
+    public void addData(DataCom dataCom){
+        adapter.dataComs.add(dataCom);
+        adapter.notifyDataSetChanged();
     }
+     public void delData (DataCom dataCom){
+         adapter.dataComs.remove(dataCom);
+         adapter.notifyDataSetChanged();
+     }
 
-    public void writeFileFavourite(ArrayList<String> arrayList){
-        try{
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
-                    getContext().openFileOutput("favourite", MODE_PRIVATE)));
-            for (int i =0 ; i < arrayList.size();i++){
-                bw.write(arrayList.get(i));
-                bw.write("\n");
-            }
-            bw.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }

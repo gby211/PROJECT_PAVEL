@@ -8,6 +8,7 @@ import android.widget.Toolbar;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,6 +37,8 @@ public class StocksFragment  extends Fragment {
 
     private Toolbar toolbar;
 
+    FavouriteFragment favouriteFragment1;
+
 
     private String[] start_tiket_str = new String[]{"TSLA","AAPL", "MSFT", "AMZN", "FB", "INTC","KO","ORCL","NVDA","NFLX","GE"};
 //    RecyclerView recyclerView;
@@ -47,6 +50,19 @@ public class StocksFragment  extends Fragment {
 //    private String[] start_tiket_str = new String[]{"AAPL", "MSFT", "AMZN", "FB"};
 //    private ArrayList<String> start_tiket = new ArrayList<>();
 //    private String KEY_FINNHUB = "c13njrv48v6qin45q270";
+
+
+    public StocksFragment(int mPage, ArrayList<DataCom> response, RecyclerView myRecyclerView, RecyclerView.LayoutManager layoutManager, RecyclerView.Adapter adapter, Toolbar toolbar/*, String[] start_tiket_str*/, FavouriteFragment favouriteFragment) {
+        this.mPage = mPage;
+        this.response = response;
+        this.myRecyclerView = myRecyclerView;
+        this.layoutManager = layoutManager;
+        this.adapter = adapter;
+        this.toolbar = toolbar;
+//        this.start_tiket_str = start_tiket_str;
+        favouriteFragment1 = favouriteFragment;
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,7 +85,7 @@ public class StocksFragment  extends Fragment {
 //        myRecyclerView = container.getRootView().findViewById(R.id.list_stocks_F);
         myRecyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
-        adapter = new AdapterMy(response);
+        adapter = new AdapterMy(response,favouriteFragment1);
 
         myRecyclerView.setLayoutManager(layoutManager);
         myRecyclerView.setAdapter(adapter);

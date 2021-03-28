@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> arrayList;
 
     public static ArrayList<String> favourite_data;
+    public static ArrayList<DataCom> DataCom_favourite_data;
 
     StocksFragment fragS;
     FavouriteFragment fragF;
@@ -52,7 +53,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         favourite_data = readFileFavourite(this);
-        Log.d("pepe",favourite_data.toString());
+//        Log.d("pepe",favourite_data.toString());
+//        favourite_data.clear();
+//        writeFileFavourite(favourite_data,this);
+//        favourite_data.add("FB");
+//        favourite_data.add("INTC");
+
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         setupViewPager(viewPager);
@@ -104,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new StocksFragment(), "Stocks");
+        adapter.addFragment(new StocksFragment(1,null,null,null,null,null,null), "Stocks");
         adapter.addFragment(new FavouriteFragment(), "Favourite");
         viewPager.setAdapter(adapter);
     }
