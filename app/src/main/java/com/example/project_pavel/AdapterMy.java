@@ -12,24 +12,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import static com.example.project_pavel.MainActivity.DataCom_favourite_data;
 import static com.example.project_pavel.MainActivity.favourite_data;
 import static com.example.project_pavel.MainActivity.writeFileFavourite;
 
 public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
 
-    public FavouriteFragment fragment1 ;
-    public ArrayList<DataCom> dataComs;
-    public AdapterMy(ArrayList<DataCom> data, FavouriteFragment fragment){
+
+    private ArrayList<DataCom> dataComs;
+    public AdapterMy(ArrayList<DataCom> data){
         dataComs = data;
-        fragment1 = fragment;
     }
 
+    MainActivity mainActivity = new MainActivity();
 
     @NonNull
     @Override
@@ -43,8 +41,9 @@ public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull MyViewClass holder, int position) {
-        DataCom_favourite_data
+
         DataCom item = dataComs.get(position);
+
 
         holder.name_com.setText(item.getName_com());
         holder.change_price.setText(item.getChange_price());
@@ -63,8 +62,6 @@ public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
                     favourite_data.add(item.getTiker());
                     Log.d("pepe",favourite_data.toString()+"  добавление");
                     writeFileFavourite(favourite_data,holder.itemView.getContext());
-
-                    //fragment1.addData();
                 }
                 else {
                     Log.d("pepe",favourite_data.toString()+"  до");
@@ -72,19 +69,11 @@ public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
                         if (com.equals(item.getTiker().toString())) {
                             favourite_data.remove(com);
                             writeFileFavourite(favourite_data,holder.itemView.getContext());
-                            DataCom tmp = dataComs.get(position);
-
-                            Log.d("dataCom",tmp.toString());
-                            Log.d("dataCom",tmp.getName_com());
-
-                            fragment1.delData(tmp);
                             break;
                         }
                     }
                     Log.d("pepe",favourite_data.toString()+"  удаление");
                 }
-
-                //notifyDataSetChanged();
             }
         }
         );
@@ -97,8 +86,6 @@ public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
             holder.change_price.setTextColor(Color.GREEN);
         }
     }
-
-
 
 
     @Override
