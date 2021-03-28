@@ -67,7 +67,7 @@ public class FavouriteFragment  extends Fragment {
         myRecyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
 
-        adapter = new AdapterMy(response,this);
+        adapter = new AdapterMy(response);
 
         myRecyclerView.setLayoutManager(layoutManager);
         myRecyclerView.setAdapter(adapter);
@@ -84,13 +84,13 @@ public class FavouriteFragment  extends Fragment {
         }
     }
 
-    public void addData(DataCom dataCom){
-        adapter.dataComs.add(dataCom);
-        adapter.notifyDataSetChanged();
-    }
-     public void delData (DataCom dataCom){
-         adapter.dataComs.remove(dataCom);
-         adapter.notifyDataSetChanged();
-     }
+//    public void addData(DataCom dataCom){
+//        adapter.dataComs.add(dataCom);
+//        adapter.notifyDataSetChanged();
+//    }
+//     public void delData (DataCom dataCom){
+//         adapter.dataComs.remove(dataCom);
+//         adapter.notifyDataSetChanged();
+//     }
 
 }

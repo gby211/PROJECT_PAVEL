@@ -85,7 +85,7 @@ public class StocksFragment  extends Fragment {
 //        myRecyclerView = container.getRootView().findViewById(R.id.list_stocks_F);
         myRecyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
-        adapter = new AdapterMy(response,favouriteFragment1);
+        adapter = new AdapterMy(response);
 
         myRecyclerView.setLayoutManager(layoutManager);
         myRecyclerView.setAdapter(adapter);
