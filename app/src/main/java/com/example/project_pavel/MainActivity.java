@@ -90,9 +90,15 @@ public class MainActivity extends AppCompatActivity {
     public void serch_com(View view) {
         search_text = editText.getText().toString();
         Intent intent = new Intent(MainActivity.this, ActivitySerch.class);
-        //intent.putExtra()
+
         startActivity(intent);
     }
+    public void NEWS(View view) {
+        Intent intent = new Intent(MainActivity.this, ActivityNEWS.class);
+
+        startActivity(intent);
+    }
+
 
     public static void writeFileFavourite(ArrayList<String> arrayList, Context context){
         try{

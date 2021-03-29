@@ -15,7 +15,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:tabIndicatorColor="#FF9800"
+        app:tabTextColor="#FF9800">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
@@ -40,8 +42,8 @@
 
     <EditText
         android:id="@+id/editTextTextPersonName"
-        android:layout_width="293dp"
-        android:layout_height="41dp"
+        android:layout_width="196dp"
+        android:layout_height="46dp"
         android:layout_marginStart="76dp"
         android:layout_marginTop="16dp"
         android:ems="10"
@@ -61,5 +63,17 @@
         app:layout_constraintTop_toTopOf="parent"
         android:onClick="serch_com"
         app:srcCompat="@android:drawable/ic_menu_search" />
+
+    <Button
+        android:id="@+id/button_NEWS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="#FF9800"
+        android:onClick="NEWS"
+        android:text="NEWS"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

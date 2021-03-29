@@ -24,7 +24,7 @@ public class ActivitySerch extends Activity {
     private RecyclerView.LayoutManager layoutManager;
     private static AdapterMy adapter;
     private String str;
-    private  ArrayList<String> arrayList_tiker;
+    private ArrayList<String> arrayList_tiker;
     private ArrayList<DataCom> response;
 
 
@@ -77,7 +77,7 @@ public class ActivitySerch extends Activity {
         myRecyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getApplicationContext());
 
-        adapter = new AdapterMy(response); // TODO добавить ссетором фрагмент
+        adapter = new AdapterMy(response);
         adapter.setFavouriteFragment(favouriteFragment1);
         adapter.setStocksFragment(stocksFragment1);
         myRecyclerView.setLayoutManager(layoutManager);
