@@ -36,7 +36,7 @@ public class StocksFragment  extends Fragment {
 
     private Toolbar toolbar;
 
-    FavouriteFragment favouriteFragment1;
+    public  static FavouriteFragment  favouriteFragment1;
 
 
     private String[] start_tiket_str = new String[]{"TSLA","AAPL", "MSFT", "AMZN", "FB", "INTC","KO","ORCL","NVDA","NFLX","GE"};
@@ -77,8 +77,8 @@ public class StocksFragment  extends Fragment {
         myRecyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
         adapter = new AdapterMy(response);
-
         adapter.setFavouriteFragment(favouriteFragment1);
+        adapter.setStocksFragment(this);
 
         myRecyclerView.setLayoutManager(layoutManager);
         myRecyclerView.setAdapter(adapter);
@@ -106,37 +106,11 @@ public class StocksFragment  extends Fragment {
         }
     }
 
-    public ArrayList<String> readFileFavourite(){
-        String str = "";
-        ArrayList<String> favourite_list = new ArrayList<>();
-        try{
-
-            BufferedReader br = new BufferedReader(new InputStreamReader(getContext().openFileInput("favourite")));
-            while ((str = br.readLine()) != null) {
-                favourite_list.add(str);
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return favourite_list;
+    public void appdate(){
+        adapter.notifyDataSetChanged();
     }
 
-    public void writeFileFavourite(ArrayList<String> arrayList){
-        try{
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
-                    getContext().openFileOutput("favourite", MODE_PRIVATE)));
-            for (int i =0 ; i < arrayList.size();i++){
-                bw.write(arrayList.get(i));
-                bw.write("\n");
-            }
-            bw.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
+
+
 }

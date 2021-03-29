@@ -1,10 +1,7 @@
 package com.example.project_pavel;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
-import android.view.DragAndDropPermissions;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,18 +11,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-import static android.content.Context.MODE_PRIVATE;
 import static com.example.project_pavel.MainActivity.favourite_data;
-import static com.example.project_pavel.MainActivity.DataCom_favourite_data;
 
 public class FavouriteFragment  extends Fragment {
 
@@ -37,7 +26,11 @@ public class FavouriteFragment  extends Fragment {
     private RecyclerView myRecyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private static AdapterMy adapter;
+    public static   StocksFragment stocksFragment1;
 
+    public void setStocksFragment1(StocksFragment stocksFragment1) {
+        this.stocksFragment1 = stocksFragment1;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,8 +61,9 @@ public class FavouriteFragment  extends Fragment {
         layoutManager = new LinearLayoutManager(getContext());
 
         adapter = new AdapterMy(response);
-
+        adapter.setStocksFragment(stocksFragment1);
         adapter.setFavouriteFragment(this);
+
 
         myRecyclerView.setLayoutManager(layoutManager);
         myRecyclerView.setAdapter(adapter);

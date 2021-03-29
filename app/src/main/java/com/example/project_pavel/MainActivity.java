@@ -1,18 +1,12 @@
 package com.example.project_pavel;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toolbar;
@@ -26,7 +20,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -67,9 +60,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         //////////////////////////////////
+
         fragF = new FavouriteFragment();
         fragS = new StocksFragment(fragF);
 
+        fragF.setStocksFragment1(fragS);
 
         //////////////////////////////////
 

@@ -13,8 +13,10 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 
+import static com.example.project_pavel.FavouriteFragment.stocksFragment1;
 import static com.example.project_pavel.MainActivity.search_result;
 import static com.example.project_pavel.MainActivity.search_text;
+import static com.example.project_pavel.StocksFragment.favouriteFragment1;
 
 public class ActivitySerch extends Activity {
 
@@ -76,7 +78,8 @@ public class ActivitySerch extends Activity {
         layoutManager = new LinearLayoutManager(getApplicationContext());
 
         adapter = new AdapterMy(response); // TODO добавить ссетором фрагмент
-
+        adapter.setFavouriteFragment(favouriteFragment1);
+        adapter.setStocksFragment(stocksFragment1);
         myRecyclerView.setLayoutManager(layoutManager);
         myRecyclerView.setAdapter(adapter);
     }

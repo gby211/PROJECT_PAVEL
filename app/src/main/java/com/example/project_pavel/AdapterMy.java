@@ -22,9 +22,15 @@ import static com.example.project_pavel.MainActivity.writeFileFavourite;
 public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
 
     FavouriteFragment favouriteFragment;
+    StocksFragment stocksFragment;
+
     public ArrayList<DataCom> dataComs;
     public AdapterMy(ArrayList<DataCom> data){
         dataComs = data;
+    }
+
+    public void setStocksFragment(StocksFragment stocksFragment) {
+        this.stocksFragment = stocksFragment;
     }
 
     public void setFavouriteFragment(FavouriteFragment favouriteFragment) {
@@ -52,7 +58,7 @@ public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
 //        if (item  == false){
 //
 //        }
-
+        Log.d("pepe",favourite_data.toString()+"  до до ");
         holder.favourite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,10 +67,14 @@ public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
                     item.setFavourite(true);
                     favourite_data.add(item.getTiker());
                     writeFileFavourite(favourite_data,holder.itemView.getContext());
-                    Log.d("pepe",favourite_data.toString()+"  добавление");
+                    Log.d("pepe",favourite_data.toString() + "  добавление");
 
                     //////////////////////////////////
-
+                    for (String str1 : favourite_data){
+                        if (str1.equals(item.getTiker())){
+                            break;
+                        }
+                    }
                     favouriteFragment.addData(item);
 
                     //////////////////////////////////
@@ -72,6 +82,7 @@ public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
                     Log.d("pepe",favourite_data.toString()+"  до");
                     for (String com: favourite_data) {
                         if (com.equals(item.getTiker().toString())) {
+
 
                             item.setFavourite(false);
                             favourite_data.remove(com);
@@ -82,9 +93,8 @@ public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
 
                             favouriteFragment.delData(item);
 
-
                             //////////////////////////////////
-
+                            stocksFragment.appdate();
                             break;
                         }
                     }
