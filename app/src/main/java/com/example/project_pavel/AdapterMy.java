@@ -21,10 +21,14 @@ import static com.example.project_pavel.MainActivity.writeFileFavourite;
 
 public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
 
-
-    private ArrayList<DataCom> dataComs;
+    FavouriteFragment favouriteFragment;
+    public ArrayList<DataCom> dataComs;
     public AdapterMy(ArrayList<DataCom> data){
         dataComs = data;
+    }
+
+    public void setFavouriteFragment(FavouriteFragment favouriteFragment) {
+        this.favouriteFragment = favouriteFragment;
     }
 
 
@@ -44,30 +48,43 @@ public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
         DataCom item = dataComs.get(position);
 
 
-        holder.name_com.setText(item.getName_com());
-        holder.change_price.setText(item.getChange_price());
-        holder.favourite.setChecked(item.getFavourite());
-        holder.price_com.setText(item.getPrice_com());
-        holder.tiker.setText(item.getTiker());
-        holder.picture.setImageBitmap(item.getPicture());
+
 //        if (item  == false){
 //
 //        }
-        holder.favourite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+        holder.favourite.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
+            public void onClick(View v) {
+                if (holder.favourite.isChecked()){
                     Log.d("pepe",favourite_data.toString()+"  до");
+                    item.setFavourite(true);
                     favourite_data.add(item.getTiker());
                     writeFileFavourite(favourite_data,holder.itemView.getContext());
                     Log.d("pepe",favourite_data.toString()+"  добавление");
-                }
-                else {
+
+                    //////////////////////////////////
+
+                    favouriteFragment.addData(item);
+
+                    //////////////////////////////////
+                } else {
                     Log.d("pepe",favourite_data.toString()+"  до");
                     for (String com: favourite_data) {
                         if (com.equals(item.getTiker().toString())) {
+
+                            item.setFavourite(false);
                             favourite_data.remove(com);
                             writeFileFavourite(favourite_data,holder.itemView.getContext());
+
+
+                            //////////////////////////////////
+
+                            favouriteFragment.delData(item);
+
+
+                            //////////////////////////////////
+
                             break;
                         }
                     }
@@ -75,8 +92,55 @@ public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
                 }
 
             }
-        }
-        );
+        });
+
+
+        holder.name_com.setText(item.getName_com());
+        holder.change_price.setText(item.getChange_price());
+        holder.favourite.setChecked(item.getFavourite());
+        holder.price_com.setText(item.getPrice_com());
+        holder.tiker.setText(item.getTiker());
+        holder.picture.setImageBitmap(item.getPicture());
+
+//        holder.favourite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if(isChecked){
+//                    Log.d("pepe",favourite_data.toString()+"  до");
+//                    favourite_data.add(item.getTiker());
+//                    writeFileFavourite(favourite_data,holder.itemView.getContext());
+//                    Log.d("pepe",favourite_data.toString()+"  добавление");
+//
+//                    //////////////////////////////////
+//
+//                    favouriteFragment.addData(item);
+//
+//                    //////////////////////////////////
+//                }
+//                else {
+//                    Log.d("pepe",favourite_data.toString()+"  до");
+//                    for (String com: favourite_data) {
+//                        if (com.equals(item.getTiker().toString())) {
+//                            favourite_data.remove(com);
+//                            writeFileFavourite(favourite_data,holder.itemView.getContext());
+//
+//
+//                            //////////////////////////////////
+//
+//                            favouriteFragment.delData(item);
+//
+//
+//                            //////////////////////////////////
+//
+//                            break;
+//                        }
+//                    }
+//                    Log.d("pepe",favourite_data.toString()+"  удаление");
+//                }
+//
+//            }
+//        }
+//        );
 
 
         if (item.getChange_price().charAt(0) == '-'){
@@ -111,6 +175,5 @@ public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
             picture = (ImageView) itemView.findViewById(R.id.imageView3);
         }
     }
-
 
 }

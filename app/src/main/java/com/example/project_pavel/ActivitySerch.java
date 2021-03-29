@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
+
 import static com.example.project_pavel.MainActivity.search_result;
 import static com.example.project_pavel.MainActivity.search_text;
 
@@ -23,6 +24,8 @@ public class ActivitySerch extends Activity {
     private String str;
     private  ArrayList<String> arrayList_tiker;
     private ArrayList<DataCom> response;
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,7 +75,7 @@ public class ActivitySerch extends Activity {
         myRecyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getApplicationContext());
 
-        adapter = new AdapterMy(response);
+        adapter = new AdapterMy(response); // TODO добавить ссетором фрагмент
 
         myRecyclerView.setLayoutManager(layoutManager);
         myRecyclerView.setAdapter(adapter);

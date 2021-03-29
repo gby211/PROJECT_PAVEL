@@ -69,6 +69,8 @@ public class FavouriteFragment  extends Fragment {
 
         adapter = new AdapterMy(response);
 
+        adapter.setFavouriteFragment(this);
+
         myRecyclerView.setLayoutManager(layoutManager);
         myRecyclerView.setAdapter(adapter);
 
@@ -83,14 +85,14 @@ public class FavouriteFragment  extends Fragment {
             mPage = getArguments().getInt(ARG_PAGE);
         }
     }
-
-//    public void addData(DataCom dataCom){
-//        adapter.dataComs.add(dataCom);
-//        adapter.notifyDataSetChanged();
-//    }
-//     public void delData (DataCom dataCom){
-//         adapter.dataComs.remove(dataCom);
-//         adapter.notifyDataSetChanged();
-//     }
-
+    //////////////////////////////////
+    public void addData(DataCom dataCom){
+        adapter.dataComs.add(dataCom);
+        adapter.notifyDataSetChanged();
+    }
+     public void delData (DataCom dataCom){
+         adapter.dataComs.remove(dataCom);
+         adapter.notifyDataSetChanged();
+     }
+    //////////////////////////////////
 }

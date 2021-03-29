@@ -47,9 +47,11 @@ public class MainActivity extends AppCompatActivity {
     public static String search_result;
     public static String search_text;
 
+
+
     EditText editText ;
     StocksFragment fragS;
-    FavouriteFragment fragF;
+    public FavouriteFragment fragF;
     androidx.fragment.app.FragmentTransaction fTrans;
 
     @Override
@@ -58,8 +60,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        editText = findViewById(R.id.editTextTextPersonName);
+
         favourite_data = readFileFavourite(this);
+//        favourite_data.clear();
+//        writeFileFavourite(favourite_data,this);
+
+
+        //////////////////////////////////
+        fragF = new FavouriteFragment();
+        fragS = new StocksFragment(fragF);
+
+
+        //////////////////////////////////
+
+
+        editText = findViewById(R.id.editTextTextPersonName);
+
 //        Log.d("pepe",favourite_data.toString());
 //        favourite_data.clear();
 //        writeFileFavourite(favourite_data,this);
@@ -79,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
     public void serch_com(View view) {
         search_text = editText.getText().toString();
         Intent intent = new Intent(MainActivity.this, ActivitySerch.class);
+        //intent.putExtra()
         startActivity(intent);
     }
 
@@ -122,8 +139,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new StocksFragment(1,null,null,null,null,null,null), "Stocks");
-        adapter.addFragment(new FavouriteFragment(), "Favourite");
+
+        adapter.addFragment(fragS, "Stocks");
+        adapter.addFragment(fragF, "Favourite");
         viewPager.setAdapter(adapter);
     }
 
