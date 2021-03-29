@@ -43,7 +43,7 @@ public class Parser_news extends AsyncTask<Void, Void, ArrayList<News_cl>> {
                 try {
                     InputStream in = new java.net.URL(url_icon).openStream();
                     icon = BitmapFactory.decodeStream(in);
-                }catch (IOException e){
+                }catch (OutOfMemoryError e ){
                     e.printStackTrace();
                 }
 
