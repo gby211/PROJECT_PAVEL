@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_rec"
     android:layout_width="match_parent"
     android:layout_height="115sp"
     android:background="@android:drawable/editbox_background"
@@ -56,11 +57,12 @@
 
     <CheckBox
         android:id="@+id/checkBox_favourite"
-        android:layout_width="26dp"
+        android:layout_width="24dp"
         android:layout_height="23dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="28dp"
         android:button="@drawable/ic_baseline_star_24"
+        android:clickable="false"
         android:theme="@style/MyCheckBox"
         app:layout_constraintStart_toEndOf="@+id/textView_tiket"
         app:layout_constraintTop_toTopOf="parent"
@@ -75,16 +77,9 @@
         android:text="TextView"
         android:textSize="17sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/textView_change_price"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_tiket" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#FF9800"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

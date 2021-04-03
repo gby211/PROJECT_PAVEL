@@ -4,11 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.google.android.material.tabs.TabLayout;
@@ -50,26 +55,27 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
+            if (isOnline(this)) {
+                setContentView(R.layout.activity_main);
 
 
-
-        favourite_data = readFileFavourite(this);
+                favourite_data = readFileFavourite(this);
 //        favourite_data.clear();
 //        writeFileFavourite(favourite_data,this);
 
 
-        //////////////////////////////////
+                //////////////////////////////////
 
-        fragF = new FavouriteFragment();
-        fragS = new StocksFragment(fragF);
+                fragF = new FavouriteFragment();
+                fragS = new StocksFragment(fragF);
 
-        fragF.setStocksFragment1(fragS);
+                fragF.setStocksFragment1(fragS);
 
-        //////////////////////////////////
+                //////////////////////////////////
 
 
-        editText = findViewById(R.id.editTextTextPersonName);
+                editText = findViewById(R.id.editTextTextPersonName);
 
 //        Log.d("pepe",favourite_data.toString());
 //        favourite_data.clear();
@@ -78,21 +84,43 @@ public class MainActivity extends AppCompatActivity {
 //        favourite_data.add("INTC");
 
 
-        viewPager = (ViewPager) findViewById(R.id.viewPager);
-        setupViewPager(viewPager);
+                viewPager = (ViewPager) findViewById(R.id.viewPager);
+                setupViewPager(viewPager);
 
-        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-        tabLayout.setupWithViewPager(viewPager);
+                tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+                tabLayout.setupWithViewPager(viewPager);
+            }else{
+                setContentView(R.layout.activity_fail);
+            }
+
 
     }
+
+    public static boolean isOnline(Context context)
+    {
+        ConnectivityManager cm =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting())
+        {
+            return true;
+        }
+        return false;
+    }
+
 
 
     public void serch_com(View view) {
         search_text = editText.getText().toString();
-        Intent intent = new Intent(MainActivity.this, ActivitySerch.class);
+        if (search_text.equals("")) {
+            Toast.makeText(this,"Enter company name",Toast.LENGTH_SHORT).show();
+        } else {
+            Intent intent = new Intent(MainActivity.this, ActivitySerch.class);
 
         startActivity(intent);
+        }
     }
+
     public void NEWS(View view) {
         Intent intent = new Intent(MainActivity.this, ActivityNEWS.class);
 

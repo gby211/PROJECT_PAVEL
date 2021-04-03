@@ -1,17 +1,19 @@
 package com.example.project_pavel;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -58,7 +60,9 @@ public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
 //        if (item  == false){
 //
 //        }
-        Log.d("pepe",favourite_data.toString()+"  до до ");
+
+
+
         holder.favourite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,9 +108,22 @@ public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
             }
         });
 
+//        holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(holder.itemView.getContext(), ActivityCom.class);
+//
+//                holder.itemView.getContext().startActivity(intent);
+//
+//                }
+//        }
+
+
+
 
         holder.name_com.setText(item.getName_com());
         holder.change_price.setText(item.getChange_price());
+        Log.d("favourite ----------", item.getFavourite().toString());
         holder.favourite.setChecked(item.getFavourite());
         holder.price_com.setText(item.getPrice_com());
         holder.tiker.setText(item.getTiker());
@@ -167,6 +184,8 @@ public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
         return dataComs.size();
     }
 
+
+
     public class MyViewClass extends RecyclerView.ViewHolder {
         TextView name_com;
         TextView tiker;
@@ -174,6 +193,8 @@ public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
         TextView change_price;
         CheckBox favourite;
         ImageView picture;
+        ConstraintLayout constraintLayout;
+
 
         public MyViewClass(@NonNull View itemView) {
             super(itemView);
@@ -183,6 +204,7 @@ public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
             change_price = (TextView) itemView.findViewById(R.id.textView_change_price);
             favourite = (CheckBox) itemView.findViewById(R.id.checkBox_favourite);
             picture = (ImageView) itemView.findViewById(R.id.imageView3);
+            constraintLayout = (ConstraintLayout) itemView.findViewById(R.id.layout_rec);
         }
     }
 
