@@ -108,15 +108,21 @@ public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
             }
         });
 
-//        holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(holder.itemView.getContext(), ActivityCom.class);
-//
-//                holder.itemView.getContext().startActivity(intent);
-//
-//                }
-//        }
+        holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(holder.itemView.getContext(), ActivityCom.class);
+
+                intent.putExtra("name_com",item.getName_com());
+                intent.putExtra("change_price",item.getChange_price());
+                intent.putExtra("favourite",item.getFavourite());
+                intent.putExtra("price_com",item.getPrice_com());
+                intent.putExtra("tiker",item.getTiker());
+
+                holder.itemView.getContext().startActivity(intent);
+
+                }
+        });
 
 
 

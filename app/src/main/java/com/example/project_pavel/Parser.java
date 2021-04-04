@@ -81,6 +81,7 @@ public class Parser extends AsyncTask<String, Void, ArrayList<DataCom>> {
                 try {
                     InputStream in = new java.net.URL(url_icon).openStream();
                     icon = BitmapFactory.decodeStream(in);
+
                 }catch (IOException e){
                     e.printStackTrace();
                 }
