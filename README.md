@@ -21,6 +21,8 @@ yandexMobileShcool
  * и ещё несколько странных ошибок.
  * в гравике цен компании, время отображается в "понятном" формате unix ))
  * поисковой запрос выполняется не всегда корректно т.к. компании представляемые api даются с точками и каждый раз разные.  
+ * Иногда багают звёздочки (но при перезагрузке приложения всё исправляется)
+
 Во время разработки возникало ОЧЕНЬ много вопросов.  
 Почти все мне удавалось правильно решить, но некоторые так и остались "костылями".  
 
@@ -28,7 +30,10 @@ yandexMobileShcool
 Пару скриншотов моего приложения:  
  ![Screenshot_2021-03-29-19-35-23-228_com.example.project_pavel.png](Screenshot_2021-03-29-19-35-23-228_com.example.project_pavel.png)  
  ![Screenshot_2021-03-29-19-38-29-936_com.example.project_pavel.png](Screenshot_2021-03-29-19-38-29-936_com.example.project_pavel.png)
- ![Screenshot_2021-03-29-19-35-18-237_com.example.project_pavel.png](Screenshot_2021-03-29-19-35-18-237_com.example.project_pavel.png)
+ ![Screenshot_2021-03-29-19-35-18-237_com.example.project_pavel.png](Screenshot_2021-03-29-19-35-18-237_com.example.project_pavel.png)  
+   
+   ![Screenshot_2021-04-04-04-53-53-904_com.example.project_pavel.png](Screenshot_2021-04-04-04-53-53-904_com.example.project_pavel.png)  
+   Мне не удалось на графике представить нормальное время ( 
 
   
 **PS.**  
