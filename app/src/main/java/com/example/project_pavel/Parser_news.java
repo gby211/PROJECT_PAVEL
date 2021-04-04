@@ -34,7 +34,7 @@ public class Parser_news extends AsyncTask<Void, Void, ArrayList<News_cl>> {
 
             response = responseFromURL.Connection(url);
             JSONArray jsonArray = new JSONArray(response);
-            for (int i = 0 ; i < 10;i++){
+            for (int i = 0; i < 10; i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 String title__ = jsonObject.getString("headline");
                 String text__ = jsonObject.getString("summary");
@@ -43,8 +43,8 @@ public class Parser_news extends AsyncTask<Void, Void, ArrayList<News_cl>> {
                 try {
                     InputStream in = new java.net.URL(url_icon).openStream();
                     icon = BitmapFactory.decodeStream(in);
-                    icon = Bitmap.createScaledBitmap(icon,160,90,true);
-                }catch (OutOfMemoryError e ){
+                    icon = Bitmap.createScaledBitmap(icon, 160, 90, true);
+                } catch (OutOfMemoryError e) {
                     e.printStackTrace();
                 }
 
@@ -54,8 +54,8 @@ public class Parser_news extends AsyncTask<Void, Void, ArrayList<News_cl>> {
 
 
             }
-            for (int i = 0; i<text.size();i++){
-                news_cls.add(new News_cl(text.get(i),title.get(i),picture.get(i)));
+            for (int i = 0; i < text.size(); i++) {
+                news_cls.add(new News_cl(text.get(i), title.get(i), picture.get(i)));
             }
 
         } catch (IOException | JSONException e) {

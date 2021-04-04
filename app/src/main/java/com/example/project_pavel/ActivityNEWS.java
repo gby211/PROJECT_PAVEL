@@ -14,7 +14,7 @@ public class ActivityNEWS extends Activity {
 
     private RecyclerView myRecyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private  AdapterNews adapter1;
+    private AdapterNews adapter1;
     private ArrayList<News_cl> response;
 
     @Override

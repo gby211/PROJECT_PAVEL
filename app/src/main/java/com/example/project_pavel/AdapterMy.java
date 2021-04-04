@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -27,7 +26,8 @@ public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
     StocksFragment stocksFragment;
 
     public ArrayList<DataCom> dataComs;
-    public AdapterMy(ArrayList<DataCom> data){
+
+    public AdapterMy(ArrayList<DataCom> data) {
         dataComs = data;
     }
 
@@ -56,26 +56,24 @@ public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
         DataCom item = dataComs.get(position);
 
 
-
 //        if (item  == false){
 //
 //        }
 
 
-
         holder.favourite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (holder.favourite.isChecked()){
-                    Log.d("pepe",favourite_data.toString()+"  до");
+                if (holder.favourite.isChecked()) {
+                    Log.d("pepe", favourite_data.toString() + "  до");
                     item.setFavourite(true);
                     favourite_data.add(item.getTiker());
-                    writeFileFavourite(favourite_data,holder.itemView.getContext());
-                    Log.d("pepe",favourite_data.toString() + "  добавление");
+                    writeFileFavourite(favourite_data, holder.itemView.getContext());
+                    Log.d("pepe", favourite_data.toString() + "  добавление");
 
                     //////////////////////////////////
-                    for (String str1 : favourite_data){
-                        if (str1.equals(item.getTiker())){
+                    for (String str1 : favourite_data) {
+                        if (str1.equals(item.getTiker())) {
                             break;
                         }
                     }
@@ -83,14 +81,14 @@ public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
 
                     //////////////////////////////////
                 } else {
-                    Log.d("pepe",favourite_data.toString()+"  до");
-                    for (String com: favourite_data) {
+                    Log.d("pepe", favourite_data.toString() + "  до");
+                    for (String com : favourite_data) {
                         if (com.equals(item.getTiker().toString())) {
 
 
                             item.setFavourite(false);
                             favourite_data.remove(com);
-                            writeFileFavourite(favourite_data,holder.itemView.getContext());
+                            writeFileFavourite(favourite_data, holder.itemView.getContext());
 
 
                             //////////////////////////////////
@@ -102,7 +100,7 @@ public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
                             break;
                         }
                     }
-                    Log.d("pepe",favourite_data.toString()+"  удаление");
+                    Log.d("pepe", favourite_data.toString() + "  удаление");
                 }
 
             }
@@ -113,18 +111,16 @@ public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
             public void onClick(View v) {
                 Intent intent = new Intent(holder.itemView.getContext(), ActivityCom.class);
 
-                intent.putExtra("name_com",item.getName_com());
-                intent.putExtra("change_price",item.getChange_price());
-                intent.putExtra("favourite",item.getFavourite());
-                intent.putExtra("price_com",item.getPrice_com());
-                intent.putExtra("tiker",item.getTiker());
+                intent.putExtra("name_com", item.getName_com());
+                intent.putExtra("change_price", item.getChange_price());
+                intent.putExtra("favourite", item.getFavourite());
+                intent.putExtra("price_com", item.getPrice_com());
+                intent.putExtra("tiker", item.getTiker());
 
                 holder.itemView.getContext().startActivity(intent);
 
-                }
+            }
         });
-
-
 
 
         holder.name_com.setText(item.getName_com());
@@ -135,51 +131,10 @@ public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
         holder.tiker.setText(item.getTiker());
         holder.picture.setImageBitmap(item.getPicture());
 
-//        holder.favourite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                if(isChecked){
-//                    Log.d("pepe",favourite_data.toString()+"  до");
-//                    favourite_data.add(item.getTiker());
-//                    writeFileFavourite(favourite_data,holder.itemView.getContext());
-//                    Log.d("pepe",favourite_data.toString()+"  добавление");
-//
-//                    //////////////////////////////////
-//
-//                    favouriteFragment.addData(item);
-//
-//                    //////////////////////////////////
-//                }
-//                else {
-//                    Log.d("pepe",favourite_data.toString()+"  до");
-//                    for (String com: favourite_data) {
-//                        if (com.equals(item.getTiker().toString())) {
-//                            favourite_data.remove(com);
-//                            writeFileFavourite(favourite_data,holder.itemView.getContext());
-//
-//
-//                            //////////////////////////////////
-//
-//                            favouriteFragment.delData(item);
-//
-//
-//                            //////////////////////////////////
-//
-//                            break;
-//                        }
-//                    }
-//                    Log.d("pepe",favourite_data.toString()+"  удаление");
-//                }
-//
-//            }
-//        }
-//        );
 
-
-        if (item.getChange_price().charAt(0) == '-'){
+        if (item.getChange_price().charAt(0) == '-') {
             holder.change_price.setTextColor(Color.RED);
-        }
-        else {
+        } else {
             holder.change_price.setTextColor(Color.GREEN);
         }
     }
@@ -189,7 +144,6 @@ public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
     public int getItemCount() {
         return dataComs.size();
     }
-
 
 
     public class MyViewClass extends RecyclerView.ViewHolder {

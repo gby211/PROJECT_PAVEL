@@ -8,22 +8,13 @@ import android.widget.Toolbar;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-import static android.content.Context.MODE_PRIVATE;
-
-public class StocksFragment  extends Fragment {
+public class StocksFragment extends Fragment {
 
     public static final String ARG_PAGE = "ARG_PAGE";
 
@@ -36,22 +27,13 @@ public class StocksFragment  extends Fragment {
 
     private Toolbar toolbar;
 
-    public  static FavouriteFragment  favouriteFragment1;
+    public static FavouriteFragment favouriteFragment1;
 
 
-    private String[] start_tiket_str = new String[]{"TSLA","AAPL", "MSFT", "AMZN", "FB", "INTC","KO","ORCL","NVDA","NFLX","GE"};
-//    RecyclerView recyclerView;
-//    ArrayList<String> name_com = new ArrayList<>();
-//    ArrayList<String> tiker = new ArrayList<>();
-//    ArrayList<Double> price_com = new ArrayList<>();
-//    ArrayList<String> change_price = new ArrayList<>();
-//    ArrayList<Boolean> favourite = new ArrayList<>();
-//    private String[] start_tiket_str = new String[]{"AAPL", "MSFT", "AMZN", "FB"};
-//    private ArrayList<String> start_tiket = new ArrayList<>();
-//    private String KEY_FINNHUB = "c13njrv48v6qin45q270";
+    private String[] start_tiket_str = new String[]{"TSLA", "AAPL", "MSFT", "AMZN", "FB", "INTC", "KO", "ORCL", "NVDA", "NFLX", "GE"};
 
 
-    public StocksFragment( FavouriteFragment favouriteFragment) {
+    public StocksFragment(FavouriteFragment favouriteFragment) {
         favouriteFragment1 = favouriteFragment;
     }
 
@@ -84,17 +66,6 @@ public class StocksFragment  extends Fragment {
         myRecyclerView.setAdapter(adapter);
 
 
-
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-//        recyclerView.setLayoutManager(linearLayoutManager);
-//        start_tiket.addAll(Arrays.asList(start_tiket_str));
-//
-//
-//
-//        System.out.println(change_price);
-//        System.out.println(start_tiket);
-//        AdapterMy adapterMy = new AdapterMy(start_tiket, start_tiket,price_com,change_price,favourite);
-//        recyclerView.setAdapter(adapterMy);
         return view;
     }
 
@@ -106,11 +77,8 @@ public class StocksFragment  extends Fragment {
         }
     }
 
-    public void appdate(){
+    public void appdate() {
         adapter.notifyDataSetChanged();
     }
-
-
-
 
 }

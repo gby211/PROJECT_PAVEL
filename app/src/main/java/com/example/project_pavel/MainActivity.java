@@ -1,20 +1,21 @@
 package com.example.project_pavel;
+/////////////////////////
+//пожалуйста прочитайте README
+/////////////////////////
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
-
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.Toolbar;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -28,7 +29,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static  String KEY_FINNHUB = "c13njrv48v6qin45q270";
+    public static String KEY_FINNHUB = "c13njrv48v6qin45q270";
     private ArrayList<DataCom> response;
     private RecyclerView myRecyclerView;
     private RecyclerView.LayoutManager layoutManager;
@@ -46,8 +47,7 @@ public class MainActivity extends AppCompatActivity {
     public static String search_text;
 
 
-
-    EditText editText ;
+    EditText editText;
     StocksFragment fragS;
     public FavouriteFragment fragF;
     androidx.fragment.app.FragmentTransaction fTrans;
@@ -56,68 +56,59 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-            if (isOnline(this)) {
-                setContentView(R.layout.activity_main);
+        if (isOnline(this)) {
+            setContentView(R.layout.activity_main);
 
 
-                favourite_data = readFileFavourite(this);
+            favourite_data = readFileFavourite(this);
 //        favourite_data.clear();
 //        writeFileFavourite(favourite_data,this);
 
 
-                //////////////////////////////////
+            //////////////////////////////////
 
-                fragF = new FavouriteFragment();
-                fragS = new StocksFragment(fragF);
+            fragF = new FavouriteFragment();
+            fragS = new StocksFragment(fragF);
 
-                fragF.setStocksFragment1(fragS);
+            fragF.setStocksFragment1(fragS);
 
-                //////////////////////////////////
-
-
-                editText = findViewById(R.id.editTextTextPersonName);
-
-//        Log.d("pepe",favourite_data.toString());
-//        favourite_data.clear();
-//        writeFileFavourite(favourite_data,this);
-//        favourite_data.add("FB");
-//        favourite_data.add("INTC");
+            //////////////////////////////////
 
 
-                viewPager = (ViewPager) findViewById(R.id.viewPager);
-                setupViewPager(viewPager);
+            editText = findViewById(R.id.editTextTextPersonName);
 
-                tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-                tabLayout.setupWithViewPager(viewPager);
-            }else{
-                setContentView(R.layout.activity_fail);
-            }
+
+            viewPager = (ViewPager) findViewById(R.id.viewPager);
+            setupViewPager(viewPager);
+
+            tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+            tabLayout.setupWithViewPager(viewPager);
+        } else {
+            setContentView(R.layout.activity_fail);
+        }
 
 
     }
 
-    public static boolean isOnline(Context context)
-    {
+    public static boolean isOnline(Context context) {
         ConnectivityManager cm =
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        if (netInfo != null && netInfo.isConnectedOrConnecting())
-        {
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
             return true;
         }
         return false;
     }
 
 
-
     public void serch_com(View view) {
         search_text = editText.getText().toString();
         if (search_text.equals("")) {
-            Toast.makeText(this,"Enter company name",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Enter company name", Toast.LENGTH_SHORT).show();
         } else {
             Intent intent = new Intent(MainActivity.this, ActivitySerch.class);
 
-        startActivity(intent);
+            startActivity(intent);
         }
     }
 
@@ -128,10 +119,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public static void writeFileFavourite(ArrayList<String> arrayList, Context context){
-        try{
+    public static void writeFileFavourite(ArrayList<String> arrayList, Context context) {
+        try {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(context.openFileOutput("favourite.txt", MODE_PRIVATE)));
-            for (int i =0 ; i < arrayList.size();i++){
+            for (int i = 0; i < arrayList.size(); i++) {
                 bw.write(arrayList.get(i));
                 bw.write("\n");
             }
@@ -143,10 +134,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public static ArrayList<String> readFileFavourite(Context context){
+    public static ArrayList<String> readFileFavourite(Context context) {
         String str = "";
         ArrayList<String> gg = new ArrayList<>();
-        try{
+        try {
 
             BufferedReader br = new BufferedReader(new InputStreamReader(context.openFileInput("favourite.txt")));
 
@@ -162,8 +153,6 @@ public class MainActivity extends AppCompatActivity {
 
         return gg;
     }
-
-
 
 
     private void setupViewPager(ViewPager viewPager) {

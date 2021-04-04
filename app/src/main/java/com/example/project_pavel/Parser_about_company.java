@@ -33,14 +33,12 @@ public class Parser_about_company extends AsyncTask<String, Void, ArrayList<Grap
             Log.d("time", String.valueOf(date.getTime()));
 
 
-
-
-            Long time_initial = date.getTime()/1000 - 2629743;
-            Long time_end = date.getTime()/1000;
+            Long time_initial = date.getTime() / 1000 - 2629743;
+            Long time_end = date.getTime() / 1000;
 
             url = "https://finnhub.io/api/v1//stock/candle?symbol=" + symbol + "&resolution=30&from=" + time_initial + "&to=" + time_end + "&token=" + key;
 
-            Log.d("url",url);
+            Log.d("url", url);
 
             response = responseFromURL.Connection(url);
 
@@ -54,15 +52,12 @@ public class Parser_about_company extends AsyncTask<String, Void, ArrayList<Grap
             arr = jsonObject.getJSONArray("t");
             for (int i = 0; i < arr.length(); i++) {
 
-                time_p.add(new Date (arr.getLong(i)));
+                time_p.add(new Date(arr.getLong(i)));
             }
 
             for (int i = 0; i < price.size(); i++) {
-                res.add(new GraphData(price.get(i),time_p.get(i)));
+                res.add(new GraphData(price.get(i), time_p.get(i)));
             }
-
-
-
 
 
         } catch (IOException | JSONException e) {
@@ -71,10 +66,10 @@ public class Parser_about_company extends AsyncTask<String, Void, ArrayList<Grap
         return res;
     }
 
-//    @Override
-//    protected void onPostExecute(ArrayList<String> tiker) {
-//        super.onPostExecute(tiker);
-//    }
+    @Override
+    protected void onPostExecute(ArrayList<GraphData> ff) {
+        super.onPostExecute(ff);
+    }
 
 
 }

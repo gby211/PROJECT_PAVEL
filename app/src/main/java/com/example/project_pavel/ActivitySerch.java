@@ -1,9 +1,7 @@
 package com.example.project_pavel;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,9 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-
 import static com.example.project_pavel.FavouriteFragment.stocksFragment1;
-import static com.example.project_pavel.MainActivity.search_result;
 import static com.example.project_pavel.MainActivity.search_text;
 import static com.example.project_pavel.StocksFragment.favouriteFragment1;
 
@@ -28,7 +24,6 @@ public class ActivitySerch extends Activity {
     private ArrayList<DataCom> response;
 
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +31,7 @@ public class ActivitySerch extends Activity {
 
         try {
             str = search_text;
-        }catch (Exception e){
+        } catch (Exception e) {
 
             e.printStackTrace();
         }
@@ -52,15 +47,15 @@ public class ActivitySerch extends Activity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        String [] list_tiker = null;
+        String[] list_tiker = null;
         try {
             list_tiker = new String[arrayList_tiker.size()];
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
 
 
-        for (int i = 0; i < arrayList_tiker.size();i++){
+        for (int i = 0; i < arrayList_tiker.size(); i++) {
             list_tiker[i] = arrayList_tiker.get(i);
         }
 

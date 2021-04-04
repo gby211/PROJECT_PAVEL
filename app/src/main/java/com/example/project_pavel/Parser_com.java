@@ -1,19 +1,13 @@
 package com.example.project_pavel;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-
-import static com.example.project_pavel.MainActivity.favourite_data;
 
 public class Parser_com extends AsyncTask<String, Void, ArrayList<String>> {
 
@@ -37,13 +31,13 @@ public class Parser_com extends AsyncTask<String, Void, ArrayList<String>> {
             JSONObject jsonObject = new JSONObject(response);
             //System.out.println();
             JSONArray arr = jsonObject.getJSONArray("result");
-            for (int i = 0; i < arr.length() || i < 5 ;i++ ){
+            for (int i = 0; i < arr.length() || i < 5; i++) {
 
                 JSONObject object = arr.getJSONObject(i);
                 String tiker_com = object.getString("symbol");
-                if (tiker_com.contains(".")){
+                if (tiker_com.contains(".")) {
                     continue;
-                }else {
+                } else {
 
                 }
                 tiker.add(tiker_com);
@@ -60,7 +54,6 @@ public class Parser_com extends AsyncTask<String, Void, ArrayList<String>> {
     protected void onPostExecute(ArrayList<String> tiker) {
         super.onPostExecute(tiker);
     }
-
 
 
 }

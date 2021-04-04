@@ -16,7 +16,7 @@ import java.util.concurrent.ExecutionException;
 
 import static com.example.project_pavel.MainActivity.favourite_data;
 
-public class FavouriteFragment  extends Fragment {
+public class FavouriteFragment extends Fragment {
 
     public static final String ARG_PAGE = "ARG_PAGE";
 
@@ -26,7 +26,7 @@ public class FavouriteFragment  extends Fragment {
     private RecyclerView myRecyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private static AdapterMy adapter;
-    public static   StocksFragment stocksFragment1;
+    public static StocksFragment stocksFragment1;
 
     public void setStocksFragment1(StocksFragment stocksFragment1) {
         this.stocksFragment1 = stocksFragment1;
@@ -39,11 +39,11 @@ public class FavouriteFragment  extends Fragment {
         View view = inflater.inflate(R.layout.fragment_favourite, container, false);
 
         String[] start_T = new String[favourite_data.size()];
-        for (int i = 0 ; i<favourite_data.size();i++){
+        for (int i = 0; i < favourite_data.size(); i++) {
             start_T[i] = favourite_data.get(i);
         }
 
-        Log.d("pup",start_T.toString());
+        Log.d("pup", start_T.toString());
         myRecyclerView = (RecyclerView) view.findViewById(R.id.list_favourite_F);
         Parser parser = new Parser();
         parser.execute(start_T);
@@ -79,14 +79,16 @@ public class FavouriteFragment  extends Fragment {
             mPage = getArguments().getInt(ARG_PAGE);
         }
     }
+
     //////////////////////////////////
-    public void addData(DataCom dataCom){
+    public void addData(DataCom dataCom) {
         adapter.dataComs.add(dataCom);
         adapter.notifyDataSetChanged();
     }
-     public void delData (DataCom dataCom){
-         adapter.dataComs.remove(dataCom);
-         adapter.notifyDataSetChanged();
-     }
+
+    public void delData(DataCom dataCom) {
+        adapter.dataComs.remove(dataCom);
+        adapter.notifyDataSetChanged();
+    }
     //////////////////////////////////
 }
