@@ -15,9 +15,14 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
+import static com.example.project_pavel.Entry.IDUSER;
 import static com.example.project_pavel.MainActivity.favourite_data;
+import static com.example.project_pavel.MainActivity.user_name_now;
 import static com.example.project_pavel.MainActivity.writeFileFavourite;
 
 public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
@@ -71,6 +76,8 @@ public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
                     writeFileFavourite(favourite_data, holder.itemView.getContext());
                     Log.d("pepe", favourite_data.toString() + "  добавление");
 
+
+
                     //////////////////////////////////
                     for (String str1 : favourite_data) {
                         if (str1.equals(item.getTiker())) {
@@ -96,6 +103,8 @@ public class AdapterMy extends RecyclerView.Adapter<AdapterMy.MyViewClass> {
                             favouriteFragment.delData(item);
 
                             //////////////////////////////////
+
+
                             stocksFragment.appdate();
                             break;
                         }
