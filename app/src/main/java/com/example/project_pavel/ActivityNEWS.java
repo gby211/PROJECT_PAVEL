@@ -2,6 +2,7 @@ package com.example.project_pavel;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -39,7 +40,5 @@ public class ActivityNEWS extends Activity {
         adapter1 = new AdapterNews(response);
         myRecyclerView.setLayoutManager(layoutManager);
         myRecyclerView.setAdapter(adapter1);
-
-
     }
 }

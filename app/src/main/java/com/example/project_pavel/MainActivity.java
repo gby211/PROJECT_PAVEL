@@ -223,10 +223,16 @@ public class MainActivity extends AppCompatActivity {
             tmp += fa+" ";
         }
         mDataBase.setValue(tmp.trim());
+        finish();
     }
 
     public void adminPan(View view){
         Intent intent = new Intent(MainActivity.this, Delate.class);
-            startActivity(intent);
+        startActivity(intent);
+    }
+    public void signout(View view){
+        Intent intent = new Intent(MainActivity.this, Entry.class);
+        startActivity(intent);
+        finish();
     }
 }

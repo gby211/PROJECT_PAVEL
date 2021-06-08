@@ -35,11 +35,11 @@ public class Parser_com extends AsyncTask<String, Void, ArrayList<String>> {
 
                 JSONObject object = arr.getJSONObject(i);
                 String tiker_com = object.getString("symbol");
-                if (tiker_com.contains(".")) {
-                    continue;
-                } else {
-
-                }
+//                if (tiker_com.contains(".")) {
+//                    continue;
+//                } else {
+//
+//                }
                 tiker.add(tiker_com);
 
             }

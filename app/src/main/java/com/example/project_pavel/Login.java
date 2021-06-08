@@ -36,8 +36,9 @@ public class Login extends AppCompatActivity {
         User user_now = new User(name,email,password,0,"",id);
         mDataBase.push().setValue(user_now);
 
-        Intent intent = new Intent(Login.this, Entry.class);
-        startActivity(intent);
+//        Intent intent = new Intent(Login.this, Entry.class);
+//        startActivity(intent);
+        finish();
     }
 
 

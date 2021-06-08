@@ -6,8 +6,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,6 +36,10 @@ public class Entry extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entry);
+
+        if (!isOnline(this)) {
+            setContentView(R.layout.activity_fail);
+        }
     }
 
 
@@ -44,7 +50,7 @@ public class Entry extends AppCompatActivity {
         password = epas.getText().toString().trim();
         mDataBase = FirebaseDatabase.getInstance().getReference(USER);
 
-        ValueEventListener vListener = new ValueEventListener() {
+        mDataBase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds : snapshot.getChildren()) {
@@ -59,13 +65,21 @@ public class Entry extends AppCompatActivity {
                                 Intent intent = new Intent(Entry.this, MainActivity.class);
                                 intent.putExtra("user_name", user1.getName());
                                 intent.putExtra("fCom", user1.getfCom());
-                                Log.d("ff",user1.getfCom());
                                 intent.putExtra("admin",user1.getAdmin().toString());
-                                Log.d("fff",user1.getAdmin().toString());
+                                Log.d("hh","gg");
                                 startActivity(intent);
-                            } else {
-                                setContentView(R.layout.activity_fail);
+
+                                email = null;
+                                password = null;
+                                finish();
+
+
                             }
+                        }
+                        else {
+                            Toast tost = Toast.makeText(Entry.this,"incorrect password",Toast.LENGTH_LONG);
+                            tost.setGravity(Gravity.CENTER, 0, 0);
+                            tost.show();
                         }
                     }
                 }
@@ -75,8 +89,48 @@ public class Entry extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        };
-        mDataBase.addValueEventListener(vListener);
+        });
+
+
+//        ValueEventListener vListener = new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for (DataSnapshot ds : snapshot.getChildren()) {
+//                    User user1 = ds.getValue(User.class);
+//                    assert user1 != null;
+//                    if (email.equals(user1.getEmail())) {
+//                        if (password.equals(user1.getPassword())) {
+//                            if (isOnline(Entry.this)) {
+//                                USER_NAME = user1.getName();
+//                                IDUSER = ds.getKey();
+//
+//                                Intent intent = new Intent(Entry.this, MainActivity.class);
+//                                intent.putExtra("user_name", user1.getName());
+//                                intent.putExtra("fCom", user1.getfCom());
+//                                intent.putExtra("admin",user1.getAdmin().toString());
+//                                startActivity(intent);
+//
+//
+//                                finish();
+//
+//
+//                            }
+//                        }
+//                        else {
+//                            Toast tost = Toast.makeText(Entry.this,"incorrect password",Toast.LENGTH_LONG);
+//                            tost.setGravity(Gravity.CENTER, 0, 0);
+//                            tost.show();
+//                        }
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        };
+//        mDataBase.addValueEventListener(vListener);
     }
 
     public static boolean isOnline(Context context) {
@@ -93,5 +147,12 @@ public class Entry extends AppCompatActivity {
     public void goToGo(View view){
         Intent intent = new Intent(Entry.this, Login.class);
             startActivity(intent);
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("hh","ggssssss");
     }
 }
